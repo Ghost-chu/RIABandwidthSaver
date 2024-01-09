@@ -204,7 +204,10 @@ public final class RIABandwidthSaver extends JavaPlugin implements Listener {
     }
 
     public void playerEcoEnable(Player player) {
-        player.sendMessage(ChatColor.GREEN + "🍃 ECO 节能模式已启用，游戏世界更新可能会延迟。");
+        String message = getConfig().getString("message.playerEcoEnable", "");
+        if(!message.isEmpty()){
+            player.sendMessage(message);
+        }
         player.setSendViewDistance(2);
         AFK_PLAYERS.add(player.getUniqueId());
     }
@@ -213,7 +216,10 @@ public final class RIABandwidthSaver extends JavaPlugin implements Listener {
         AFK_PLAYERS.remove(player.getUniqueId());
         player.setSendViewDistance(-1);
         player.resetPlayerTime();
-        player.sendMessage(ChatColor.DARK_GRAY + "🍃 ECO 节能模式已停用。");
+        String message = getConfig().getString("message.playerEcoDisable", "");
+        if(!message.isEmpty()){
+            player.sendMessage(message);
+        }
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
@@ -230,6 +236,17 @@ public final class RIABandwidthSaver extends JavaPlugin implements Listener {
     }
 
 
+
+    @Override
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (args.length == 1) {
+            return  List.of(
+                    "reload",
+                    "unfiltered"
+            );
+        }
+        return null;
+    }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
