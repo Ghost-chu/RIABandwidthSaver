@@ -208,13 +208,17 @@ public final class RIABandwidthSaver extends JavaPlugin implements Listener {
         if(!message.isEmpty()){
             player.sendMessage(message);
         }
-        player.setSendViewDistance(2);
+        if(getConfig().getBoolean("modifyPlayerViewDistance")) {
+            player.setSendViewDistance(2);
+        }
         AFK_PLAYERS.add(player.getUniqueId());
     }
 
     public void playerEcoDisable(Player player) {
         AFK_PLAYERS.remove(player.getUniqueId());
-        player.setSendViewDistance(-1);
+        if(getConfig().getBoolean("modifyPlayerViewDistance")) {
+            player.setSendViewDistance(-1);
+        }
         player.resetPlayerTime();
         String message = getConfig().getString("message.playerEcoDisable", "");
         if(!message.isEmpty()){
