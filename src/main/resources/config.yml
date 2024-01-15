@@ -1,7 +1,6 @@
 # 计算所有数据包（即启用 /riabandwidthsaver unfiltered 的统计信息）
 calcAllPackets: true
 modifyPlayerViewDistance: false
-
 message:
   playerEcoEnable: '§a🍃 ECO 节能模式已启用，游戏世界更新可能会延迟。'
   playerEcoDisable: '§8🍃 ECO 节能模式已停用。'

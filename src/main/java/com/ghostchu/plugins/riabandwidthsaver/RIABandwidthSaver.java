@@ -61,7 +61,6 @@ public final class RIABandwidthSaver extends JavaPlugin implements Listener {
             getLogger().severe("未检测到任何支持的 AFK 状态钩子，插件退出……");
             Bukkit.getPluginManager().disablePlugin(this);
         }
-        afkHooks.forEach(hook-> Bukkit.getPluginManager().registerEvents(hook, this));
     }
 
     @Override
